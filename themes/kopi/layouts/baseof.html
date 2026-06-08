@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ or .Site.Language.LanguageCode .Site.Language.Lang }}">
 <head>
-    {{ partial "head.html" . }}
+    {{ _partial "head.html" . }}
 </head>
 <body>
-    {{ partial "header.html" . }}
+    {{ _partial "header.html" . }}
 
     <div class="main-wrapper">
         <div class="container">
@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    {{ partial "footer.html" . }}
+    {{ __partial "footer.html" . }}
     
     {{ if .Store.Get "hasMermaid" }}
     <script type="module">
