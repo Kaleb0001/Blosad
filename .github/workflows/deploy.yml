@@ -1,0 +1,32 @@
+name: Deploy Blog Scientifique
+
+on:
+  push:
+    branches:
+      - main  # déploiement automatique sur la branche principale
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo Extended
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.125.0'
+          extended: true
+
+      - name: Build site
+        run: hugo --minify
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2
+        with:
+          publish-dir: ./public
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify-site-id: ${{ secrets.NETLIFY_BLOSAD_SITE_ID }}
